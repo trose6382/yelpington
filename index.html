@@ -1,24 +1,81 @@
-<style>
-  h1 {
-    color: red;
-  }
-</style>
+<!DOCTYPE html>
+
+<html> 
+
+
+<head>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+
+</head>
+
+
+<body>
+  <div id="json-content">
+    <div id="name"></div>
+    <div id="hours"></div>
+    <div id="phone"></div>
+    <div id="menu"></div>
+    <div id="location"></div>
+      <iframe id="map" 
+      width="300"
+      height="300"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2846.8156456649544!2d-73.21455698520234!3d44.477951479101634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cca7af7a825deb3%3A0x2ffe327d2d1ec46!2sAsiana+Noodle+Shop!5e0!3m2!1sen!2sus!4v1530650289297" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <div id="comments"></div>
+  </div>
+
+</body>
+
 
 <script>
 
   // document.querySelector('body').innerHTML = s);  will actually get the element
 
-fetch('asiana-noodle-house.json')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myText) {
-    let body = document.querySelector('body')
-    body.innerHTML = "<h1>" + myText.name + "</h1>";
-    body.innerHTML += "<h2>" + myText.hours + "</h2>";
-    body.innerHTML += "<h2>" + myText.phoneNumber + "</h2>";
+  fetch('asiana-noodle-house.json')
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (myText) {
+      let body = document.querySelector('body')
+      // body.innerHTML = "<h1>" + myText.name + "</h1>";
+      // body.innerHTML += "<h2>" + myText.hours + "</h2>";
+      // body.innerHTML += "<h2>" + myText.phoneNumber + "</h2>";
+      //link to menu
+      // body.innerHTML += "<h3>" + myText.address + "</h3>";
+      //map
+      // body.innerHTML += "<p>" + myText.notes + "<p>";
 
+      let name = document.getElementById("name")
+        .innerHTML = "<h1>" + myText.name + "</h1>";
 
-  });
+      let hours = document.getElementById("hours")
+        .innerHTML = "<h2>" + myText.hours + "</h2>";
+
+      let phone = document.getElementById("phone")
+        .innerHTML = "<h2>" + myText.phoneNumber + "</h2>";
+
+      let location = document.getElementById("location")
+        // .innerHTML = "<h3>" + myText.address + "</h3>";
+        formatAddress(myText)
+
+      let comments = document.getElementById("comments")
+        .innerHTML = "<p>" + myText.notes + "<p>";
+    });
+
+function formatAddress (jsonObj) {
+  let street_and_rest = jsonObj.address.split('.')
+  let city_state_zip = street_and_rest[1].split(' ')
+  let city_state = city_state_zip.slice(0,1)
+  let zip = city_state_zip[2]
+
+  console.log({street_and_rest})
+  console.log({city_state_zip})
+  console.log({city_state})
+  console.log({zip})
+}
 
 </script>
+
+
+</html>

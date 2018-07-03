@@ -1,0 +1,20 @@
+body {
+    border: 1px solid black;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    width: 450px;
+    background-color: white;
+    opacity: 0.75;
+}
+
+#map {
+    opacity: 1.0;
+    background-color: white;
+}
+
+html {
+    background: url(animal-art-asia-932261.jpg) no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}

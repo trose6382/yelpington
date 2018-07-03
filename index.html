@@ -1,11 +1,24 @@
+<style>
+  h1 {
+    color: red;
+  }
+</style>
+
 <script>
 
-fetch('city-market.md')
+  // document.querySelector('body').innerHTML = s);  will actually get the element
+
+fetch('asiana-noodle-house.json')
   .then(function(response) {
-    return response.text();
+    return response.json();
   })
   .then(function(myText) {
-    console.log(myText);
+    let body = document.querySelector('body')
+    body.innerHTML = "<h1>" + myText.name + "</h1>";
+    body.innerHTML += "<h2>" + myText.hours + "</h2>";
+    body.innerHTML += "<h2>" + myText.phoneNumber + "</h2>";
+
+
   });
 
 </script>

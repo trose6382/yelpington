@@ -1,10 +1,68 @@
-body {
+#header {
+    text-align: center;
+}
+
+#yelpington banner {
+    height: 10px;
+}
+
+#all-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#json-content {
     border: 1px solid black;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
     width: 450px;
     background-color: white;
     opacity: 0.75;
+    position: relative;
+}
+
+.restaurants {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.restaurants:hover {
+    cursor: pointer;
+    color: cyan;
+    border-left: 1px solid cyan;
+}
+
+#map {
+    position: relative;
+
+}
+
+#left-content {
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #7cc0e7;
+}
+
+html {
+    background: url(pexels-photo-1022216.jpeg) no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* #json-content {
+    border: 1px solid black;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    width: 450px;
+    background-color: white;
+    opacity: 0.75;
+    position: relative;
 }
 
 #map {
@@ -18,3 +76,32 @@ html {
     display: flex;
     justify-content: center;
 }
+
+.restaurants {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.restaurants:hover {
+    cursor: pointer;
+    color: cyan;
+    border-left: 1px solid cyan;
+    padding-left: 10px;
+}
+
+body {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#restaurant-list {
+    padding-left: 10px;
+    line-height: 30px;
+    /* border-left: 1px solid black; */
+    margin: 25px;
+} */
+

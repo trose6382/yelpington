@@ -1,51 +1,67 @@
 <!DOCTYPE html>
 
-<html> 
-
+<html>
 
 <head>
   <link rel="stylesheet" href="style.css" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
-
 </head>
 
-
 <body>
-  <div id="json-content">
-    <div id="name"></div>
-    <div id="hours"></div>
-    <div id="phone"></div>
-    <div id="menu"></div>
-    <div id="location"></div>
-      <iframe id="map" 
-      width="300"
-      height="300"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2846.8156456649544!2d-73.21455698520234!3d44.477951479101634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cca7af7a825deb3%3A0x2ffe327d2d1ec46!2sAsiana+Noodle+Shop!5e0!3m2!1sen!2sus!4v1530650289297" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-    <div id="comments"></div>
+  <div id="header">
+    <img src="yelpington banner.png" id="yelpington banner" style: height=75px;>
+  </div>
+
+  <div id="all-content">
+
+    <div id="left-content">
+      <iframe id="map" width="500" height="500" src="https://www.openstreetmap.org/export/embed.html?bbox=-73.2291%2C44.4835%2C-73.2080%2C44.4729%2C&amp;layer=mapnik"></iframe>
+    </div>
+
+    <div id="right-content">
+      <div id="restaurant-list">
+        <a class="restaurants" href="#asiana-noodle-house">Asiana Noodle House</a>
+        <a class="restaurants" href="#august-first">August First</a>
+        <a class="restaurants" href="#church-street-tavern">Church Street Tavern</a>
+        <a class="restaurants" href="#city-market">City Market</a>
+        <a class="restaurants" href="#mr.mikes">Mr. Mikes</a>
+        <a class="restaurants" href="#new-moon">New Moon</a>
+      </div>
+
+
+      <div id="json-content">
+        <div id="name"></div>
+        <div id="hours"></div>
+        <div id="phone"></div>
+        <div id="menu"></div>
+        <div id="location"></div>
+        <div id="comments"></div>
+      </div>
+    </div>
+
   </div>
 
 </body>
 
-
 <script>
+  let params = new URLSearchParams(document.location.search.slice(1));
+  let name = params.get("name");
+  let anyAddress = ''
 
-  // document.querySelector('body').innerHTML = s);  will actually get the element
 
-  fetch('asiana-noodle-house.json')
+  function nameFixer() {
+    name = name.split(' ').join('-')
+    nameId = name + '.json'
+    console.log(nameId);
+  }
+  nameFixer();
+
+
+  fetch(nameId)
     .then(function (response) {
       return response.json();
     })
     .then(function (myText) {
-      let body = document.querySelector('body')
-      // body.innerHTML = "<h1>" + myText.name + "</h1>";
-      // body.innerHTML += "<h2>" + myText.hours + "</h2>";
-      // body.innerHTML += "<h2>" + myText.phoneNumber + "</h2>";
-      //link to menu
-      // body.innerHTML += "<h3>" + myText.address + "</h3>";
-      //map
-      // body.innerHTML += "<p>" + myText.notes + "<p>";
-
       let name = document.getElementById("name")
         .innerHTML = "<h1>" + myText.name + "</h1>";
 
@@ -53,29 +69,52 @@
         .innerHTML = "<h2>" + myText.hours + "</h2>";
 
       let phone = document.getElementById("phone")
-        .innerHTML = "<h2>" + myText.phoneNumber + "</h2>";
+        .innerHTML = "<h2>" + myText['phone number'] + "</h2>";
 
       let location = document.getElementById("location")
-        // .innerHTML = "<h3>" + myText.address + "</h3>";
-        formatAddress(myText)
+        .innerHTML = "<h3>" + myText.address + "</h3>";
 
       let comments = document.getElementById("comments")
         .innerHTML = "<p>" + myText.notes + "<p>";
     });
+</script>
 
-function formatAddress (jsonObj) {
-  let street_and_rest = jsonObj.address.split('.')
-  let city_state_zip = street_and_rest[1].split(' ')
-  let city_state = city_state_zip.slice(0,1)
-  let zip = city_state_zip[2]
 
-  console.log({street_and_rest})
-  console.log({city_state_zip})
-  console.log({city_state})
-  console.log({zip})
-}
+<script>
+
+  fetch(nameId)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (anyAddress) {
+      anyAddress = anyAddress.address.split(' ').join('+').split(',').join('%2C').split('.').join('');
+      console.log(anyAddress)
+      return anyAddress;
+    })
+
+    .then(function (anyAddress) {
+      return fetch('https://nominatim.openstreetmap.org/search.php?q=' + anyAddress + '&format=json')
+        .then(function (response) {
+          console.log(anyAddress)
+          return reponse.json();
+        })
+        .then(function (Map) {
+          let boundingbox = document.getElementById('map')
+            .innerHTML = "<p>" + Map.boundingbox + "<p>";
+        }).catch(function (err) {
+        });
+    });
+
 
 </script>
 
 
+
+
 </html>
+
+
+
+<!-- //To show address on 3 different lines // function formatAddress (jsonObj) { // let street_and_rest = jsonObj.address.split('.')
+// let city_state_zip = street_and_rest[1].split(' ') // let city_state = city_state_zip.slice(0,1) // let zip = city_state_zip[2]
+// console.log({street_and_rest}) // console.log({city_state_zip}) // console.log({city_state}) // console.log({zip}) // -->

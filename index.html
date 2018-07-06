@@ -9,9 +9,21 @@
 
 <body>
   <div id="header">
-    <img src="yelpington banner.png" id="yelpington banner" style: height=75px;>
+    <img src="yelpington banner.png" id="yelpington banner" style: height=125px;>
   </div>
 
+  <nav id="navbar">
+    <ul>
+      <a class="restaurants" href="/alhi-babas-kabob-shop">Alhi Baba's Kabob Shop</a>
+      <a class="restaurants" href="/asiana-noodle-house">Asiana Noodle House</a>
+      <a class="restaurants" href="/august-first">August First</a>
+      <a class="restaurants" href="/church-street-tavern">Church Street Tavern</a>
+      <a class="restaurants" href="/city-market">City Market</a>
+      <a class="restaurants" href="/mr-mikes">Mr. Mikes</a>
+      <a class="restaurants" href="/new-moon">New Moon</a>
+    </ul>
+  </nav>
+  
   <div id="all-content">
 
     <div id="left-content">
@@ -19,16 +31,6 @@
     </div>
 
     <div id="right-content">
-      <div id="restaurant-list">
-        <a class="restaurants" href="#asiana-noodle-house">Asiana Noodle House</a>
-        <a class="restaurants" href="#august-first">August First</a>
-        <a class="restaurants" href="#church-street-tavern">Church Street Tavern</a>
-        <a class="restaurants" href="#city-market">City Market</a>
-        <a class="restaurants" href="#mr.mikes">Mr. Mikes</a>
-        <a class="restaurants" href="#new-moon">New Moon</a>
-      </div>
-
-
       <div id="json-content">
         <div id="name"></div>
         <div id="hours"></div>
@@ -44,20 +46,10 @@
 </body>
 
 <script>
-  let params = new URLSearchParams(document.location.search.slice(1));
-  let name = params.get("name");
+  let path = document.location.pathname.slice(1)
   let anyAddress = ''
 
-
-  function nameFixer() {
-    name = name.split(' ').join('-')
-    nameId = name + '.json'
-    console.log(nameId);
-  }
-  nameFixer();
-
-
-  fetch(nameId)
+  fetch(path + '.json')
     .then(function (response) {
       return response.json();
     })
@@ -81,9 +73,9 @@
 
 
 <script>
-let name = document.location.pathname.slice(1);
+  let name = document.location.pathname.slice(1);
 
-  fetch(nameId)
+  fetch(name + '.json')
     .then(function (response) {
       return response.json();
     })

@@ -1,15 +1,19 @@
 #header {
     text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+
 }
 
 #yelpington banner {
     height: 10px;
+    padding: 10px;
 }
 
 #all-content {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 #json-content {
@@ -28,12 +32,17 @@
     text-decoration: none;
     color: black;
     cursor: pointer;
+    padding: 0 8px;
+    border-top: 4px solid transparent;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    
 }
 
 .restaurants:hover {
     cursor: pointer;
-    color: cyan;
-    border-left: 1px solid cyan;
+    border-top: 4px solid #7cc0e7;
 }
 
 #map {
@@ -45,6 +54,15 @@
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid #7cc0e7;
+    margin: 15px;
+    margin-bottom: 0px;
+}
+
+#right-content {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 html {
@@ -54,6 +72,17 @@ html {
     justify-content: center;
 }
 
+#navbar ul {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    padding-left: 0px;
+}
+
+#all-content {
+    margin-top: 10px;
+}
 
 /* #json-content {
     border: 1px solid black;
